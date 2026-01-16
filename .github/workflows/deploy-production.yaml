@@ -1,0 +1,21 @@
+name: Deploy Production
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Production
+        env:
+          APP_ENV: ${{ vars.SECRET_URL }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+        run: |
+          echo "Deploying to PRODUCTION"
+          echo ${APP_ENV}
+          echo ${DB_HOST}
