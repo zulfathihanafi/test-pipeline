@@ -1,0 +1,21 @@
+name: Deploy Dev
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Dev
+        env:
+          APP_ENV: ${{ vars.SECRET_URL }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+        run: |
+          echo "Deploying to DEV"
+          echo ${APP_ENV}
+          echo ${DB_HOST}

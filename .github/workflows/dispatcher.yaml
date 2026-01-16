@@ -1,0 +1,21 @@
+name: Push Dispatcher
+
+on:
+  push:
+    branches:
+      - dev
+      - staging
+      - main
+
+jobs:
+  deploy-dev:
+    if: github.ref_name == 'dev'
+    uses: ./.github/workflows/deploy-dev.yml
+
+  deploy-staging:
+    if: github.ref_name == 'staging'
+    uses: ./.github/workflows/deploy-staging.yml
+
+  deploy-production:
+    if: github.ref_name == 'main'
+    uses: ./.github/workflows/deploy-production.yml
